@@ -1,69 +1,96 @@
 import subprocess
 import sys
+import argparse
+import logging
+from pathlib import Path
+import time
+log_path = Path(__file__).resolve().parents[2] / ('logs')
 
-LOADING_DATE='2019-02'
-BASE_PATH='/user/linux/NYC-Taxi'
-STG_PATH=f'{BASE_PATH}/stg_temp_write/yellow'
-YELLOW_BRONZE_PATH=f'{BASE_PATH}/bronze/yellow'
-SOURCE_PATH ="../../data"
+logging.basicConfig(
 
-def delete_inital_path_of_bronze():
+    filename=f'{log_path}/yellow_ingestion.log',
+    filemode='a',
+    level=logging.INFO,
+    format='%(asctime)s | %(name)s | %(levelname)s | %(message)s',
+    datefmt="%Y-%m-%d %H:%M:%S"
 
-    results = subprocess.run(['hdfs' , 'dfs' , '-rm' ,'-r' , '-f' , f"{YELLOW_BRONZE_PATH}/date={LOADING_DATE}"] , capture_output=True , check=True , text=True)
-        
-    if results.returncode != 0:
-        print(f"ERROR: {results.stderr}")
-        sys.exit(1)
+)
 
-def delete_inital_path_of_stg():
+ingestion_logging = logging.getLogger('INGESTION')
 
-    
-    results = subprocess.run(['hdfs' , 'dfs' , '-rm' ,'-r' , '-f' , f"{STG_PATH}"] , capture_output=True , check=True , text=True)
-        
-    if results.returncode != 0:
-            print(f"ERROR: {results.stderr}")
-            sys.exit(1)
 
-def construct_path_to_bronze():
-    
-    results = subprocess.run(['hdfs' , 'dfs' , '-mkdir' ,'-p' , f"{YELLOW_BRONZE_PATH}/date={LOADING_DATE}"] , capture_output=True , check=True , text=True)
-    print("Dir created")
-    if results.returncode != 0:
-            print(f"ERROR: {results.stderr}")
-            sys.exit(1)
+def hdfs(*args):
 
-def construct_path_to_stg():
-    
+    cmd = ['hdfs' , 'dfs' , *args]
+    ingestion_logging.info(f"Executing {str(cmd)}")
+
     try:
-        results = subprocess.run(['hdfs' , 'dfs' , '-mkdir' ,'-p' , f"{STG_PATH}"] , capture_output=True , check=True , text=True)
-        print("Dir created")
-    except subprocess.CalledProcessError:
-        print(f"ERROR: {results.stderr}")
+        res = subprocess.run(cmd , check=True , capture_output=True , text=True)    
+    except subprocess.CalledProcessError as error:
+        ingestion_logging.error(f"Faild to execute {str(cmd)} - Exit Code: {error.returncode} - {error.stderr}")
         sys.exit(1)
+
+    ingestion_logging.info(f"SUCCESS |  {str(cmd)}")
+
+
+
+
+
+
+def load_from_stg_to_bronze(source_path , base_path , loading_date):
+
+    #Log Job Start Time
+    start_time = time.perf_counter()
+
+
+    ingestion_logging.info(f"Yellow Move From Source to HDFS Bronze - {loading_date} - Started")
+    yellow_bronze_path = f"{base_path}/bronze/yellow"
+    stg_path = f"{base_path}/stg_temp_write/yellow"
+
+    # Remove any data existing in target bronze - HDFS
+    hdfs('-rm' ,'-r' , '-f' , f"{yellow_bronze_path}/date={loading_date}")
+
+    # Remove previous data in STG_TEMP HDFS
+    hdfs('-rm' ,'-r' , '-f' , f"{stg_path}")
+
+
+    # Build The Temp STG Write Directory
+    hdfs('-mkdir' ,'-p' , f"{stg_path}")
+
+    # Build the Bronze date=YYYY-MM Directory
+    hdfs('-mkdir' ,'-p' , f"{yellow_bronze_path}/date={loading_date}")
+
+
+    # Move data from STG Area to STG TEMP WRITE HDFS
+    hdfs("-put" , f"{source_path}/yellow_tripdata_{loading_date}.parquet" , f"{stg_path}")
     
+    # Change pointer to be in bronze directory
+    hdfs("-mv" , f"{stg_path}/yellow_tripdata_{loading_date}.parquet" , f"{yellow_bronze_path}/date={loading_date}/yellow_tripdata_{loading_date}.parquet")
 
-def move_to_stg_temp_writing():
-    
-    results = subprocess.run(["hdfs" , "dfs" , "-put" , f"{SOURCE_PATH}/yellow_tripdata_{LOADING_DATE}.parquet" , f"{STG_PATH}"],capture_output=True , check=True , text=True)
+    end_time = time.perf_counter()
 
-    if results.returncode != 0:
-            print(f"ERROR: {results.stderr}")
-            sys.exit(1)
+    execution_time = (end_time - start_time) / 60
 
-def move_from_temp_to_bronze():
+    ingestion_logging.info(f"Ingestion Job Finished with execution time {execution_time: .2f}")
 
-    results = subprocess.run(["hdfs" , "dfs" , "-mv" , f"{STG_PATH}/yellow_tripdata_{LOADING_DATE}.parquet" , f"{YELLOW_BRONZE_PATH}/date={LOADING_DATE}/yellow_tripdata_{LOADING_DATE}.parquet"] , capture_output=True, check=True , text=True)
-    if results.returncode != 0:
-            print(f"ERROR: {results.stderr}")
-            sys.exit(1)     
+    ingestion_logging.info("Ingestion From STG to HDFS Bronze Successed")
 
-def move_from_stg_to_bronze():
-    delete_inital_path_of_bronze()
-    delete_inital_path_of_stg()
-    construct_path_to_stg()
-    construct_path_to_bronze()
-    move_to_stg_temp_writing()
-    move_from_temp_to_bronze()
+def main():
+
+    source_data_path = Path(__file__).resolve().parents[2] / 'data'    
+    args = argparse.ArgumentParser(description="Basic Config for the Yellow Pipeline")
+    args.add_argument('--loading_date' ,type=str ,  default='2019-02' , help='Pipeline start date')
+    args.add_argument('--source_path' ,type=Path ,  default=source_data_path , help='STG Path')
+    args.add_argument('--base_path' ,type=str ,  default='/user/linux/NYC-Taxi' , help='HDFS Base Path')
+
+    pipeline_config = args.parse_args()
+
+    load_from_stg_to_bronze(pipeline_config.source_path , pipeline_config.base_path , pipeline_config.loading_date)
+
+
+
 
 if __name__ == '__main__':
-    move_from_stg_to_bronze()
+
+   main()
+
