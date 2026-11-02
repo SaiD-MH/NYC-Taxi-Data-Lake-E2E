@@ -4,6 +4,7 @@ import argparse
 import logging
 from pathlib import Path
 import time
+
 log_path = Path(__file__).resolve().parents[2] / ('logs')
 
 logging.basicConfig(
