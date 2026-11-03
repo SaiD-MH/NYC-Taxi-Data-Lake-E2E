@@ -5,11 +5,11 @@ import logging
 from pathlib import Path
 import time
 
-log_path = Path(__file__).resolve().parents[2] / ('logs')
-
+log_path = Path(__file__).resolve().parents[2] / ('pipeline_logs')
+schema_path = Path(__file__).resolve().parents[1]/"data_source_schema/yellow"
 logging.basicConfig(
 
-    filename=f'{log_path}/yellow_ingestion.log',
+    filename=f'{log_path}/yellow.log',
     filemode='a',
     level=logging.INFO,
     format='%(asctime)s | %(name)s | %(levelname)s | %(message)s',

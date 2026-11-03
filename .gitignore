@@ -61,7 +61,7 @@ cover/
 
 # Django stuff:
 *.log
-!pipeline_logs/yellow_ingestion.log
+!pipeline_logs/yellow.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
