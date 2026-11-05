@@ -42,6 +42,16 @@ def contract_check(contract , loaded):
     else:
         print("Check: PASSED")
 
+def store_current_data_schema(schema , loading_date):
+    
+    target_path = Path(__file__).resolve().parents[2] / f"data_source_schema/yellow/date={loading_date}"
+    target_path.mkdir()
+
+
+    with open(f'{target_path}/source_loaded_schema.json' , 'w') as f:
+        json.dump(schema , f , indent= 2)
+
+
 
 def main():
 
@@ -52,6 +62,7 @@ def main():
 
     schema = read_bronze_parquet_schema(f"hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/yellow/date={run_configs.loading_date}/yellow_tripdata_{run_configs.loading_date}.parquet")
     contract = read_stored_contract()
+    store_current_data_schema(schema , run_configs.loading_date)
     contract_check(contract , schema)
 
 
