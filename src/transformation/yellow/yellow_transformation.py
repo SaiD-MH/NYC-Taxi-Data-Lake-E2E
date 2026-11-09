@@ -239,6 +239,8 @@ def drop_non_postive_total_amounts_records(yellow_df):
     
     return df , error_records
 
+def add_service_type(yellow_df):
+    return yellow_df.withColumn('service_type' , func.lit(1))
 
 
 def run_transformation():
@@ -264,6 +266,7 @@ def run_transformation():
     df10 , err8 = drop_invalid_payment_type_records(df9)
     df11 , err9 = drop_non_postive_total_amounts_records(df10)
     df12 = add_id_column_to_yellow(df11)
+    df13 = add_service_type(df12)
 
     dfs = [ err2, err3, err4, err5, err6,
         err7, err8, err9]
@@ -277,7 +280,7 @@ def run_transformation():
 
     create_loading_date_dir(pipeline_configs.silver_path , pipeline_configs.loading_date)
 
-    store_df_as_parquet(df12 , 'yellow_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
+    store_df_as_parquet(df13 , 'yellow_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
     store_df_as_parquet(yellow_errors , 'quarantine_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
 
 
@@ -298,3 +301,4 @@ def run_transformation():
 
 
 run_transformation()
+

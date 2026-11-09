@@ -143,3 +143,79 @@ py4j.protocol.Py4JNetworkError: Answer from Java side is empty
 2026-11-03 21:56:01 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/yellow/yellow_tripdata_2026-01.parquet', '/user/linux/NYC-Taxi/bronze/yellow/date=2026-01/yellow_tripdata_2026-01.parquet']
 2026-11-03 21:56:01 | INGESTION | INFO | Ingestion Job Finished with execution time  0.21
 2026-11-03 21:56:01 | INGESTION | INFO | Ingestion From STG to HDFS Bronze Successed
+2026-11-05 21:49:44 | TRANSFORMATION | INFO | read_yellow_parque_file | read yellow parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/yellow/date=2019-02/yellow_tripdata_2019-02.parquet
+2026-11-05 21:49:47 | TRANSFORMATION | ERROR | read_yellow_parque_file | DataFrame.cache() takes 1 positional argument but 2 were given
+2026-11-05 21:49:47 | TRANSFORMATION | INFO | read_yellow_parque_file | SUCESS To Read - yellow_tripdata_2019-02.parquet
+2026-11-05 21:49:48 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-05 21:50:47 | TRANSFORMATION | INFO | read_yellow_parque_file | read yellow parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/yellow/date=2019-02/yellow_tripdata_2019-02.parquet
+2026-11-05 21:50:50 | TRANSFORMATION | ERROR | read_yellow_parque_file | DataFrame.cache() takes 1 positional argument but 2 were given
+2026-11-05 21:50:50 | TRANSFORMATION | INFO | read_yellow_parque_file | SUCESS To Read - yellow_tripdata_2019-02.parquet
+2026-11-05 21:50:52 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-05 21:52:47 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-05 21:52:47 | TRANSFORMATION | INFO | read_yellow_parque_file | read yellow parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/yellow/date=2019-02/yellow_tripdata_2019-02.parquet
+2026-11-05 21:52:50 | TRANSFORMATION | ERROR | read_yellow_parque_file | DataFrame.cache() takes 1 positional argument but 2 were given
+2026-11-05 21:52:50 | TRANSFORMATION | INFO | read_yellow_parque_file | SUCESS To Read - yellow_tripdata_2019-02.parquet
+2026-11-05 21:52:50 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-05 21:52:50 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-05 21:52:50 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Drop Passangeer Count <= 0 Started
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Drop invalid vendor id
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Drop invalid trip distances
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Drop invalid pickup location records
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Drop invalid dropoff location records
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Drop invalid payment type records
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Drop non positive total amount records
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Finished Successfully
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | add_id_column_to_yellow | Start Add Id column Process
+2026-11-05 21:52:51 | TRANSFORMATION | INFO | add_id_column_to_yellow | Finished Successfully
+2026-11-05 21:52:52 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/yellow_cleansed_data/date=2019-02']
+2026-11-05 21:52:54 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/yellow_cleansed_data/date=2019-02']
+2026-11-05 21:52:54 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/quarantine_data/date=2019-02']
+2026-11-05 21:52:56 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/quarantine_data/date=2019-02']
+2026-11-05 21:54:20 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +------------------------------------------------------+------------+
+|err_reason                                            |error_counts|
++------------------------------------------------------+------------+
+|Null values or values less then equal zero not allowed|148813      |
+|Trip distance must be greater than zero               |41892       |
+|vendor_id value is not in allowed list [1,2,6,7]      |51650       |
+|total amount must be > 0                              |8123        |
+|Null values or pickup >= dropoff not allowed          |5911        |
++------------------------------------------------------+------------+
+
+2026-11-05 21:54:20 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-05 21:56:43 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-05 21:56:43 | TRANSFORMATION | INFO | read_yellow_parque_file | read yellow parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/yellow/date=2019-02/yellow_tripdata_2019-02.parquet
+2026-11-05 21:56:46 | TRANSFORMATION | ERROR | read_yellow_parque_file | DataFrame.cache() takes 1 positional argument but 2 were given
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | read_yellow_parque_file | SUCESS To Read - yellow_tripdata_2019-02.parquet
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Drop Passangeer Count <= 0 Started
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Finished Successfully
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Drop invalid vendor id
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Finished Successfully
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Finished Successfully
+2026-11-05 21:56:46 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Drop invalid trip distances
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Finished Successfully
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Drop invalid pickup location records
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Finished Successfully
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Drop invalid dropoff location records
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Finished Successfully
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Drop invalid payment type records
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Finished Successfully
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Drop non positive total amount records
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Finished Successfully
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | add_id_column_to_yellow | Start Add Id column Process
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | add_id_column_to_yellow | Finished Successfully
+2026-11-05 21:56:47 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/yellow_cleansed_data/date=2019-02']
+2026-11-05 21:56:49 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/yellow_cleansed_data/date=2019-02']
+2026-11-05 21:56:49 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/quarantine_data/date=2019-02']
+2026-11-05 21:56:51 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/yellow/quarantine_data/date=2019-02']
+2026-11-05 21:57:57 | py4j.clientserver | INFO | close | Closing down clientserver connection
