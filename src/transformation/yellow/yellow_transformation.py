@@ -146,6 +146,35 @@ def drop_passanger_count_lze_zero(yellow_df):
 
     return df , error_records
 
+
+
+def pickup_date_valid_range(yellow_df , loading_date):
+
+    transformation_logging.info('Drop pickup dates not in same month of loading date Started')
+
+    rule = func.date_format(func.col('pickup_dttm') ,'yyyyMM') == f'{loading_date}'
+    df , error_records = split_by_rule(yellow_df , rule , 'pickup date in YYMM must be same  as loading date')
+
+    
+    transformation_logging.info(f"Finished Successfully")
+
+    return df , error_records
+
+
+def dropoff_date_valid_range(yellow_df , loading_date):
+
+    transformation_logging.info('Drop dropOff dates not in same month of loading date Started')
+
+    rule = func.date_format(func.col('dropoff_dttm') ,'yyyyMM') == f'{loading_date}'
+    df , error_records = split_by_rule(yellow_df , rule , 'drop_off date in YYMM must be same  as loading date')
+
+    
+    transformation_logging.info(f"Finished Successfully")
+
+    return df , error_records
+
+
+
 def drop_invalid_vendor_id(yellow_df):
 
     transformation_logging.info('Drop invalid vendor id')
@@ -265,11 +294,12 @@ def run_transformation():
     df9 , err7= drop_invalid_dropoff_locations_records(df8)
     df10 , err8 = drop_invalid_payment_type_records(df9)
     df11 , err9 = drop_non_postive_total_amounts_records(df10)
-    df12 = add_id_column_to_yellow(df11)
-    df13 = add_service_type(df12)
+    df12, err10 = pickup_date_valid_range(df11 , pipeline_configs.loading_date)
+    df13, err11 = dropoff_date_valid_range(df12 , pipeline_configs.loading_date)
+    df14 = add_id_column_to_yellow(df13)
+    df15 = add_service_type(df14)
 
-    dfs = [ err2, err3, err4, err5, err6,
-        err7, err8, err9]
+    dfs = [ err2, err3, err4, err5, err6,err7, err8, err9, err10 , err11]
 
     yellow_errors = reduce(
         lambda df1, df2: df1.unionByName(df2),
@@ -280,7 +310,7 @@ def run_transformation():
 
     create_loading_date_dir(pipeline_configs.silver_path , pipeline_configs.loading_date)
 
-    store_df_as_parquet(df13 , 'yellow_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
+    store_df_as_parquet(df15 , 'yellow_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
     store_df_as_parquet(yellow_errors , 'quarantine_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
 
 
