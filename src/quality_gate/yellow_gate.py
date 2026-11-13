@@ -3,7 +3,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 import sys
 import argparse
-
+from datetime import datetime
+import calendar
 # 1. Initialize a local Spark Session
 spark = SparkSession.builder.appName("Yellow-Cleased-Quality-Check")\
                     .config("spark.eventLog.enabled", "true") \
@@ -19,8 +20,11 @@ def read_cleasned_yellow_data(loading_date):
 
 
 
-def yellow_quality_checks(cleansed_yellow):
+def yellow_quality_checks(cleansed_yellow, loading_date):
 
+    first_date_of_month = datetime.strptime(loading_date, "%Y-%m").date()
+    last_day = calendar.monthrange(first_date_of_month.year , first_date_of_month.month)[1]
+    last_date_of_month = first_date_of_month.replace(day=last_day)
 
 
     # Initialize an Ephemeral Data Context
@@ -44,8 +48,9 @@ def yellow_quality_checks(cleansed_yellow):
         gx.expectations.ExpectColumnValuesToBeBetween(column="pickup_loc_id",min_value=1,max_value=265,row_condition="pickup_loc_id IS NOT NULL",condition_parser="spark"),
         gx.expectations.ExpectColumnValuesToBeBetween(column="dropoff_loc_id",min_value=1,max_value=265,row_condition="dropoff_loc_id IS NOT NULL",condition_parser="spark"),
         gx.expectations.ExpectColumnValuesToBeBetween(column="payment_type",min_value=0,max_value=6,row_condition="payment_type IS NOT NULL",condition_parser="spark"),
-        gx.expectations.ExpectColumnValuesToBeBetween(column="total_amount",min_value=0,strict_min=True, row_condition = "total_amount IS NOT NULL" , condition_parser="spark") 
-
+        gx.expectations.ExpectColumnValuesToBeBetween(column="total_amount",min_value=0,strict_min=True, row_condition = "total_amount IS NOT NULL" , condition_parser="spark"),
+        gx.expectations.ExpectColumnValuesToBeBetween(column="pickup_month",min_value=first_date_of_month,max_value=last_date_of_month,row_condition="pickup_month IS NOT NULL",condition_parser="spark"),
+        gx.expectations.ExpectColumnValuesToBeBetween(column="dropoff_month",min_value=first_date_of_month,max_value=last_date_of_month,row_condition="dropoff_month IS NOT NULL",condition_parser="spark")
     ]
 
 
@@ -59,6 +64,7 @@ def yellow_quality_checks(cleansed_yellow):
     validation_result = batch.validate(suite)
 
     if validation_result.success == False:
+        print(validation_result)
         print("FAILED")
         sys.exit(1)
     else:
@@ -73,8 +79,8 @@ def run_yellow_quality_gate():
     gate_configs = args.parse_args()
 
     yellow_df = read_cleasned_yellow_data(gate_configs.loading_date)
-    yellow_quality_checks(yellow_df)
-
+    yellow_quality_checks(yellow_df , gate_configs.loading_date)
+    # yellow_df.printSchema()
 
 
 if __name__ == '__main__':

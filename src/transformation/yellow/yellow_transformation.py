@@ -76,7 +76,6 @@ def read_yellow_parque_file(loading_date):
 
     try:
         df = spark.read.parquet(file_path)
-        df.cache(StorageLevel.MEMORY_AND_DISK)
     except Exception as e:
         transformation_logging.error(e)
 
@@ -152,7 +151,7 @@ def pickup_date_valid_range(yellow_df , loading_date):
 
     transformation_logging.info('Drop pickup dates not in same month of loading date Started')
 
-    rule = func.date_format(func.col('pickup_dttm') ,'yyyyMM') == f'{loading_date}'
+    rule = func.date_format(func.col('pickup_dttm') ,'yyyy-MM') == f'{loading_date}'
     df , error_records = split_by_rule(yellow_df , rule , 'pickup date in YYMM must be same  as loading date')
 
     
@@ -165,7 +164,7 @@ def dropoff_date_valid_range(yellow_df , loading_date):
 
     transformation_logging.info('Drop dropOff dates not in same month of loading date Started')
 
-    rule = func.date_format(func.col('dropoff_dttm') ,'yyyyMM') == f'{loading_date}'
+    rule = func.date_format(func.col('dropoff_dttm') ,'yyyy-MM') == f'{loading_date}'
     df , error_records = split_by_rule(yellow_df , rule , 'drop_off date in YYMM must be same  as loading date')
 
     
@@ -271,6 +270,11 @@ def drop_non_postive_total_amounts_records(yellow_df):
 def add_service_type(yellow_df):
     return yellow_df.withColumn('service_type' , func.lit(1))
 
+def add_pickup_month(yellow_df):
+    return yellow_df.withColumn('pickup_month' , func.to_date(func.date_format(func.col('pickup_dttm') ,'yyyy-MM')))
+def add_dropoff_month(yellow_df):
+    return yellow_df.withColumn('dropoff_month' , func.to_date(func.date_format(func.col('dropoff_dttm') ,'yyyy-MM')))
+
 
 def run_transformation():
     
@@ -285,6 +289,7 @@ def run_transformation():
 
 
     df1  = read_yellow_parque_file(pipeline_configs.loading_date)
+    df1.cache(StorageLevel.MEMORY_AND_DISK)
     df2  = columns_renaming(df1)
     df4 , err2= drop_passanger_count_lze_zero(df2)
     df5 , err3= drop_invalid_vendor_id(df4)
@@ -298,6 +303,8 @@ def run_transformation():
     df13, err11 = dropoff_date_valid_range(df12 , pipeline_configs.loading_date)
     df14 = add_id_column_to_yellow(df13)
     df15 = add_service_type(df14)
+    df16 = add_pickup_month(df15)
+    df17 = add_dropoff_month(df16)
 
     dfs = [ err2, err3, err4, err5, err6,err7, err8, err9, err10 , err11]
 
@@ -310,8 +317,9 @@ def run_transformation():
 
     create_loading_date_dir(pipeline_configs.silver_path , pipeline_configs.loading_date)
 
-    store_df_as_parquet(df15 , 'yellow_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
+    store_df_as_parquet(df17 , 'yellow_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
     store_df_as_parquet(yellow_errors , 'quarantine_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
+
 
 
 
@@ -323,6 +331,7 @@ def run_transformation():
 
     df_string = error_summary._show_string(n=20, truncate=False, vertical=False)
 
+    df1.unpersist(blocking=True)
 
 
     
@@ -330,5 +339,5 @@ def run_transformation():
 
 
 
-run_transformation()
-
+if __name__ == '__main__':
+    run_transformation()
