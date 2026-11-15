@@ -45,12 +45,7 @@ def store_trip_fact(trip_df , base_path):
 
     fact_path = f"{base_path}/gold/facts/trip_fact"
         
-    trip_df.write \
-        .format("parquet") \
-        .option("path", fact_path) \
-        .mode("overwrite") \
-        .saveAsTable("rate_code_dim")
-
+    
     trip_df.write \
     .mode("overwrite") \
     .partitionBy("service_type_key" , "pick_date_key") \
