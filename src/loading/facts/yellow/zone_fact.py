@@ -47,7 +47,7 @@ def store_zone_fact(zone_df , base_path):
 
     zone_df.write \
     .mode("overwrite") \
-    .partitionBy("zone_key" , "service_key") \
+    .partitionBy("service_key" , "zone_key" ) \
     .parquet(fact_path)
 
 
@@ -60,8 +60,7 @@ def fill_zone_fact():
     zone_dim , service_dim , date_dim , time_dim = load_dims_table()
 
     # SELECT Key Columns from dims for cross table building
-    date_dim.show()
-    date_dim.printSchema()
+ 
     zone_df = zone_dim.select(func.col('location_id').alias('zone_key'))
     service_df = service_dim.select(func.col('service_id').alias('service_key')).filter(func.col('service_id') == 1)
     date_df = date_dim.select(func.col('date_key')).filter(
