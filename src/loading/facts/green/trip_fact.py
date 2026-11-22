@@ -36,7 +36,7 @@ def fill_trip_fact(green_df):
         func.col('rate_code_id').alias('ratecode_key'),
         func.date_format(func.col('pickup_dttm') , "HHmm" ).alias('pick_time_key'),
         func.date_format(func.col('dropoff_dttm') , "HHmm" ).alias('drop_time_key'),
-        func.col('trip_type').alias('trip_type_key')
+        func.col('trip_type').cast('int').alias('trip_type_key')
         
     )
     
@@ -68,6 +68,7 @@ def run_fill_trip_fact(loading_date , base_path):
         trip_fact,
         base_path
     )
+
 
 
 def main():

@@ -7,6 +7,8 @@ import argparse
 spark = SparkSession.builder.appName("Yellow-Loading-revenue-fact")\
                     .config("spark.eventLog.enabled", "true") \
                     .config("spark.eventLog.dir", "file:///tmp/spark-events") \
+                    .config("spark.sql.sources.partitionOverwriteMode", "dynamic")\
+                    .config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "1")\
                     .getOrCreate()
 
 
@@ -33,7 +35,7 @@ def fill_revenue_fact(yellow_df):
                             func.date_format(func.col('dropoff_dttm') ,'yyyyMMdd').alias('drop_date_key'),
                             func.col('service_type').alias('service_type_key'),
                             func.col('total_amount').alias('revenue'),
-                            func.col('payment_type').alias('payment_type_key'),
+                            func.col('payment_type').cast('int').alias('payment_type_key'),
                             # func.col('airport_fee')
                         ).withColumn('trip_type_key', func.lit(1))\
     
