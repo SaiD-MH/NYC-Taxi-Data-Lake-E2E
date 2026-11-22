@@ -7,6 +7,8 @@ import argparse
 spark = SparkSession.builder.appName("Yellow-Loading-zone-fact")\
                     .config("spark.eventLog.enabled", "true") \
                     .config("spark.eventLog.dir", "file:///tmp/spark-events") \
+                    .config("spark.sql.sources.partitionOverwriteMode", "dynamic")\
+                    .config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "1")\
                     .getOrCreate()
 
 
@@ -62,7 +64,7 @@ def fill_zone_fact():
     # SELECT Key Columns from dims for cross table building
  
     zone_df = zone_dim.select(func.col('location_id').alias('zone_key'))
-    service_df = service_dim.select(func.col('service_id').alias('service_key')).filter(func.col('service_id') == 1)
+    service_df = service_dim.select(func.col('service_id').cast('int').alias('service_key')).filter(func.col('service_id') == 1)
     date_df = date_dim.select(func.col('date_key')).filter(
             func.date_format(func.to_date("date_key", "yyyyMMdd"), "yyyy-MM") == run_config.loading_date
 

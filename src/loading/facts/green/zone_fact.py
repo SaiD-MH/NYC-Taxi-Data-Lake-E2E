@@ -4,16 +4,18 @@ from pyspark.sql import functions as func
 from pathlib import Path
 import argparse
 # 1. Initialize a local Spark Session
-spark = SparkSession.builder.appName("Yellow-Loading-zone-fact")\
+spark = SparkSession.builder.appName("green-Loading-zone-fact")\
                     .config("spark.eventLog.enabled", "true") \
                     .config("spark.eventLog.dir", "file:///tmp/spark-events") \
+                    .config("spark.sql.sources.partitionOverwriteMode", "dynamic")\
+                    .config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "1")\
                     .getOrCreate()
 
 
 args = argparse.ArgumentParser(description='Dims Locations in HDFS')
 args.add_argument('--base_dim_path' ,type=str ,  default='hdfs://localhost:9000/user/linux/NYC-Taxi/gold/dims')
 args.add_argument('--loading_date' , type= str , default='2019-02' )
-args.add_argument('--yellow_path', type=str , default='hdfs://localhost:9000/user/linux/NYC-Taxi/silver/yellow/yellow_cleansed_data')
+args.add_argument('--green_path', type=str , default='hdfs://localhost:9000/user/linux/NYC-Taxi/silver/green/green_cleansed_data')
 args.add_argument('--fact_path' , type=str ,  default='hdfs://localhost:9000/user/linux/NYC-Taxi/gold/facts')
 run_config = args.parse_args()
 
@@ -21,8 +23,8 @@ def read_dim_table(dim_base_path , dim_name):
     return spark.read.parquet(f"{dim_base_path}/{dim_name}")
 
 
-def read_cleansed_yellow(path_to_yellow , loading_date):
-    return spark.read.parquet(f'{path_to_yellow}/date={loading_date}')
+def read_cleansed_green(path_to_green , loading_date):
+    return spark.read.parquet(f'{path_to_green}/date={loading_date}')
 
 
 
@@ -56,13 +58,13 @@ def store_zone_fact(zone_df , base_path):
 def fill_zone_fact():
 
 
-    yellow_df = read_cleansed_yellow(run_config.yellow_path , run_config.loading_date)
+    green_df = read_cleansed_green(run_config.green_path , run_config.loading_date)
     zone_dim , service_dim , date_dim , time_dim = load_dims_table()
 
     # SELECT Key Columns from dims for cross table building
  
     zone_df = zone_dim.select(func.col('location_id').alias('zone_key'))
-    service_df = service_dim.select(func.col('service_id').alias('service_key')).filter(func.col('service_id') == 1)
+    service_df = service_dim.select(func.col('service_id').cast('int').alias('service_key')).filter(func.col('service_id') == 2)
     date_df = date_dim.select(func.col('date_key')).filter(
             func.date_format(func.to_date("date_key", "yyyyMMdd"), "yyyy-MM") == run_config.loading_date
 
@@ -75,7 +77,7 @@ def fill_zone_fact():
 
 
     dim_joins.createOrReplaceTempView('dims')
-    yellow_df.createOrReplaceTempView('yellow')
+    green_df.createOrReplaceTempView('green')
 
 
     zone_fact = spark.sql(
@@ -86,7 +88,7 @@ def fill_zone_fact():
                d.hour,
                (
                     SELECT count(*) 
-                    FROM yellow y 
+                    FROM green y 
                     WHERE y.pickup_loc_id = d.zone_key AND 
                          y.service_type = d.service_key  AND 
                          date_format(y.pickup_dttm, 'yyyyMMdd')= d.date_key AND
@@ -94,7 +96,7 @@ def fill_zone_fact():
                 ) as pickup_counts,
                 (
                     SELECT count(*) 
-                    FROM yellow y 
+                    FROM green y 
                     WHERE y.dropoff_loc_id = d.zone_key AND 
                          y.service_type = d.service_key  AND 
                          date_format(y.dropoff_dttm, 'yyyyMMdd')= d.date_key AND
