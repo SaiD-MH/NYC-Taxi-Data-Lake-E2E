@@ -283,7 +283,7 @@ def drop_non_postive_total_amounts_records(green_df):
     return df , error_records
 
 def add_service_type(green_df):
-    return green_df.withColumn('service_type' , func.lit(1))
+    return green_df.withColumn('service_type' , func.lit(2))
 
 def add_pickup_month(green_df):
     return green_df.withColumn('pickup_month' , func.to_date(func.date_format(func.col('pickup_dttm') ,'yyyy-MM')))

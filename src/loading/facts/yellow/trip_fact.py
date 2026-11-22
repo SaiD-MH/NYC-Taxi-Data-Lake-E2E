@@ -7,6 +7,8 @@ import argparse
 spark = SparkSession.builder.appName("Yellow-Loading-trip-fact")\
                     .config("spark.eventLog.enabled", "true") \
                     .config("spark.eventLog.dir", "file:///tmp/spark-events") \
+                    .config("spark.sql.sources.partitionOverwriteMode", "dynamic")\
+                    .config("spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version", "1")\
                     .getOrCreate()
 
 
