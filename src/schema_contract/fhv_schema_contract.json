@@ -1,0 +1,47 @@
+{
+  "type": "struct",
+  "fields": [
+    {
+      "name": "dispatching_base_num",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "pickup_datetime",
+      "type": "timestamp_ntz",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "dropOff_datetime",
+      "type": "timestamp_ntz",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "PUlocationID",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "DOlocationID",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "SR_Flag",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "Affiliated_base_number",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    }
+  ]
+}

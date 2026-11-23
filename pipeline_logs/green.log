@@ -1,0 +1,135 @@
+2026-11-18 19:47:30 | INGESTION | INFO | Green Move From Source to HDFS Bronze - 2019-02 - Started
+2026-11-18 19:47:30 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:47:34 | INGESTION | ERROR | Faild to execute ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/green/date=2019-02'] - Exit Code: 1 - rm: Call From Linux/127.0.1.1 to localhost:9000 failed on connection exception: java.net.ConnectException: Connection refused (connect failed); For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+
+2026-11-18 19:49:08 | INGESTION | INFO | Green Move From Source to HDFS Bronze - 2019-02 - Started
+2026-11-18 19:49:08 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:49:10 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:49:10 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:49:12 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:49:12 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:49:15 | INGESTION | ERROR | Faild to execute ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/green'] - Exit Code: 1 - mkdir: Cannot create directory /user/linux/NYC-Taxi/stg_temp_write/green. Name node is in safe mode.
+
+2026-11-18 19:51:08 | INGESTION | INFO | Green Move From Source to HDFS Bronze - 2019-02 - Started
+2026-11-18 19:51:08 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:51:10 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:51:10 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:51:11 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:51:11 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:51:14 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:51:14 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:51:16 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/bronze/green/date=2019-02']
+2026-11-18 19:51:16 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-put', '/home/linux/Desktop/data-engineering-projects/NYC-Taxi-Data-Lake-E2E/data/green_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:51:18 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-put', '/home/linux/Desktop/data-engineering-projects/NYC-Taxi-Data-Lake-E2E/data/green_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/stg_temp_write/green']
+2026-11-18 19:51:18 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/green/green_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/green/date=2019-02/green_tripdata_2019-02.parquet']
+2026-11-18 19:51:20 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/green/green_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/green/date=2019-02/green_tripdata_2019-02.parquet']
+2026-11-18 19:51:20 | INGESTION | INFO | Ingestion Job Finished with execution time  0.21
+2026-11-18 19:51:20 | INGESTION | INFO | Ingestion From STG to HDFS Bronze Successed
+2026-11-21 14:21:05 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-21 14:21:05 | TRANSFORMATION | INFO | read_green_parque_file | read green parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/green/date=2019-02/green_tripdata_2019-02.parquet
+2026-11-21 14:21:09 | TRANSFORMATION | INFO | read_green_parque_file | SUCESS To Read - green_tripdata_2019-02.parquet
+2026-11-21 14:21:09 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-21 14:26:19 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-21 14:26:19 | TRANSFORMATION | INFO | read_green_parque_file | read green parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/green/date=2019-02/green_tripdata_2019-02.parquet
+2026-11-21 14:26:22 | TRANSFORMATION | INFO | read_green_parque_file | SUCESS To Read - green_tripdata_2019-02.parquet
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Drop Passangeer Count <= 0 Started
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Finished Successfully
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Drop invalid vendor id
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Finished Successfully
+2026-11-21 14:26:23 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-21 14:26:24 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-21 14:30:42 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-21 14:33:21 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-21 14:33:21 | TRANSFORMATION | INFO | read_green_parque_file | read green parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/green/date=2019-02/green_tripdata_2019-02.parquet
+2026-11-21 14:33:24 | TRANSFORMATION | INFO | read_green_parque_file | SUCESS To Read - green_tripdata_2019-02.parquet
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Drop Passangeer Count <= 0 Started
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Drop invalid vendor id
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Drop invalid trip distances
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Drop invalid pickup location records
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Drop invalid dropoff location records
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Finished Successfully
+2026-11-21 14:33:25 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Drop invalid payment type records
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Finished Successfully
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Drop non positive total amount records
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Finished Successfully
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | pickup_date_valid_range | Drop pickup dates not in same month of loading date Started
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | pickup_date_valid_range | Finished Successfully
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | dropoff_date_valid_range | Drop dropOff dates not in same month of loading date Started
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | dropoff_date_valid_range | Finished Successfully
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | drop_invalid_trip_types | Drop invalid trip types
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | drop_invalid_trip_types | Finished Successfully
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | add_id_column_to_green | Start Add Id column Process
+2026-11-21 14:33:26 | TRANSFORMATION | INFO | add_id_column_to_green | Finished Successfully
+2026-11-21 14:33:27 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/green_cleansed_data/date=2019-02']
+2026-11-21 14:33:29 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/green_cleansed_data/date=2019-02']
+2026-11-21 14:33:29 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/quarantine_data/date=2019-02']
+2026-11-21 14:33:31 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/quarantine_data/date=2019-02']
+2026-11-21 14:33:56 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +------------------------------------------------------+------------+
+|err_reason                                            |error_counts|
++------------------------------------------------------+------------+
+|Null values or values less then equal zero not allowed|41584       |
+|Trip distance must be greater than zero               |8742        |
+|total amount must be > 0                              |2192        |
+|Null values or pickup >= dropoff not allowed          |1358        |
+|trip_type value is not in allowed list [1,2]          |335         |
+|pickup date in YYMM must be same  as loading date     |79          |
+|drop_off date in YYMM must be same  as loading date   |178         |
++------------------------------------------------------+------------+
+
+2026-11-21 14:33:56 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-21 23:10:33 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-21 23:10:33 | TRANSFORMATION | INFO | read_green_parque_file | read green parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/green/date=2019-02/green_tripdata_2019-02.parquet
+2026-11-21 23:10:35 | TRANSFORMATION | INFO | read_green_parque_file | SUCESS To Read - green_tripdata_2019-02.parquet
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Drop Passangeer Count <= 0 Started
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_passanger_count_lze_zero | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Drop invalid vendor id
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_vendor_id | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Drop invalid trip distances
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Drop invalid pickup location records
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Drop invalid dropoff location records
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Drop invalid payment type records
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_invalid_payment_type_records | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Drop non positive total amount records
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | drop_non_postive_total_amounts_records | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | pickup_date_valid_range | Drop pickup dates not in same month of loading date Started
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | pickup_date_valid_range | Finished Successfully
+2026-11-21 23:10:36 | TRANSFORMATION | INFO | dropoff_date_valid_range | Drop dropOff dates not in same month of loading date Started
+2026-11-21 23:10:37 | TRANSFORMATION | INFO | dropoff_date_valid_range | Finished Successfully
+2026-11-21 23:10:37 | TRANSFORMATION | INFO | drop_invalid_trip_types | Drop invalid trip types
+2026-11-21 23:10:37 | TRANSFORMATION | INFO | drop_invalid_trip_types | Finished Successfully
+2026-11-21 23:10:37 | TRANSFORMATION | INFO | add_id_column_to_green | Start Add Id column Process
+2026-11-21 23:10:37 | TRANSFORMATION | INFO | add_id_column_to_green | Finished Successfully
+2026-11-21 23:10:37 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/green_cleansed_data/date=2019-02']
+2026-11-21 23:10:39 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/green_cleansed_data/date=2019-02']
+2026-11-21 23:10:39 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/quarantine_data/date=2019-02']
+2026-11-21 23:10:41 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/green/quarantine_data/date=2019-02']
+2026-11-21 23:11:00 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +------------------------------------------------------+------------+
+|err_reason                                            |error_counts|
++------------------------------------------------------+------------+
+|Null values or values less then equal zero not allowed|41584       |
+|Trip distance must be greater than zero               |8742        |
+|total amount must be > 0                              |2192        |
+|Null values or pickup >= dropoff not allowed          |1358        |
+|trip_type value is not in allowed list [1,2]          |335         |
+|pickup date in YYMM must be same  as loading date     |79          |
+|drop_off date in YYMM must be same  as loading date   |178         |
++------------------------------------------------------+------------+
+
+2026-11-21 23:11:00 | py4j.clientserver | INFO | close | Closing down clientserver connection

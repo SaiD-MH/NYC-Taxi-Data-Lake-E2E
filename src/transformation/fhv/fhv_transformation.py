@@ -252,6 +252,13 @@ def add_trip_type_column(fhv_df):
 
 
 
+
+def add_pickup_month(fhv_df):
+    return fhv_df.withColumn('pickup_month' , func.to_date(func.date_format(func.col('pickup_dttm') ,'yyyy-MM')))
+def add_dropoff_month(fhv_df):
+    return fhv_df.withColumn('dropoff_month' , func.to_date(func.date_format(func.col('dropoff_dttm') ,'yyyy-MM')))
+
+
 def run_transformation():
     
     args = argparse.ArgumentParser(description="Pipeline Configs for the transformation")
@@ -277,6 +284,8 @@ def run_transformation():
     df10 = add_service_type_column(df9)
     df11 = add_id_column_to_fhv(df10)
     df12 = add_trip_type_column(df11)
+    df13 = add_pickup_month(df12)
+    df14 = add_dropoff_month(df13)
 
 
 
@@ -294,7 +303,7 @@ def run_transformation():
 
     create_loading_date_dir(pipeline_configs.silver_path , pipeline_configs.loading_date)
 
-    store_df_as_parquet(df12 , 'fhv_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
+    store_df_as_parquet(df14 , 'fhv_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
     store_df_as_parquet(fhv_errors , 'quarantine_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
 
 

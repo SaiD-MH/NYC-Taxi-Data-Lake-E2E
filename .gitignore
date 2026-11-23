@@ -6,6 +6,8 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+
+
 # C extensions
 *.so
 src/loading/facts/green/test.py
@@ -61,7 +63,7 @@ cover/
 
 # Django stuff:
 *.log
-!pipeline_logs/yellow.log
+!pipeline_logs/*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal

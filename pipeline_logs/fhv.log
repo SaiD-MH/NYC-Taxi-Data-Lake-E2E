@@ -1,0 +1,268 @@
+2026-11-23 09:02:23 | INGESTION | INFO | fhv Move From Source to HDFS Bronze - 2019-02 - Started
+2026-11-23 09:02:23 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/fhv/date=2019-02']
+2026-11-23 09:02:24 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/fhv/date=2019-02']
+2026-11-23 09:02:24 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/fhv']
+2026-11-23 09:02:26 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/fhv']
+2026-11-23 09:02:26 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/fhv']
+2026-11-23 09:02:28 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/fhv']
+2026-11-23 09:02:28 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/bronze/fhv/date=2019-02']
+2026-11-23 09:02:30 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/bronze/fhv/date=2019-02']
+2026-11-23 09:02:30 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-put', '/home/linux/Desktop/data-engineering-projects/NYC-Taxi-Data-Lake-E2E/data/fhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/stg_temp_write/fhv']
+2026-11-23 09:02:32 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-put', '/home/linux/Desktop/data-engineering-projects/NYC-Taxi-Data-Lake-E2E/data/fhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/stg_temp_write/fhv']
+2026-11-23 09:02:32 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/fhv/fhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet']
+2026-11-23 09:02:34 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/fhv/fhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet']
+2026-11-23 09:02:34 | INGESTION | INFO | Ingestion Job Finished with execution time  0.20
+2026-11-23 09:02:34 | INGESTION | INFO | Ingestion From STG to HDFS Bronze Successed
+2026-11-23 09:05:50 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 19:52:28 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 19:54:31 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 19:54:31 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 19:54:35 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 19:54:35 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 19:54:35 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 19:54:35 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 19:54:35 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 19:54:35 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 19:55:08 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 19:55:08 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 19:55:10 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 19:55:11 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 19:55:11 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 19:55:11 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 19:55:11 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 19:55:11 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 19:55:55 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 19:55:55 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 19:55:58 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 19:55:58 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 19:55:58 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 19:55:58 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 19:55:58 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 19:56:04 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:10:05 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:10:05 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:10:07 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:10:07 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:10:07 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:10:07 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:10:07 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:10:07 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:10:08 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:10:08 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:10:08 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:10:13 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:12:29 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:12:29 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:12:30 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:12:31 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:12:36 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:21:50 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:21:50 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:21:53 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:21:54 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:21:54 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:21:54 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:21:54 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:21:54 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:21:59 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:34:27 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:34:27 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:34:29 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 20:34:30 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 20:34:35 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:35:21 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:35:21 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:35:24 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 20:35:25 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 20:35:30 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:43:25 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:43:25 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:43:28 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | add_id_column_to_fhv | Start Add Id column Process
+2026-11-23 20:43:29 | TRANSFORMATION | INFO | add_id_column_to_fhv | Finished Successfully
+2026-11-23 20:43:39 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:44:42 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:44:42 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:44:46 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | add_id_column_to_fhv | Start Add Id column Process
+2026-11-23 20:44:47 | TRANSFORMATION | INFO | add_id_column_to_fhv | Finished Successfully
+2026-11-23 20:44:57 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:47:32 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:47:32 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:47:34 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-23 20:47:35 | TRANSFORMATION | INFO | add_id_column_to_fhv | Start Add Id column Process
+2026-11-23 20:47:36 | TRANSFORMATION | INFO | add_id_column_to_fhv | Finished Successfully
+2026-11-23 20:47:50 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 20:54:43 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 20:54:43 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 20:54:45 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | add_id_column_to_fhv | Start Add Id column Process
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | add_id_column_to_fhv | Finished Successfully
+2026-11-23 20:54:46 | TRANSFORMATION | INFO | add_trip_type_column | Adding Trip Type column Started
+2026-11-23 20:54:47 | TRANSFORMATION | INFO | add_trip_type_column | Finished Successfully
+2026-11-23 20:54:47 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/fhv_cleansed_data/date=2019-02']
+2026-11-23 20:54:49 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/fhv_cleansed_data/date=2019-02']
+2026-11-23 20:54:49 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/quarantine_data/date=2019-02']
+2026-11-23 20:54:51 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/quarantine_data/date=2019-02']
+2026-11-23 20:55:12 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +-----------------------------------------------------------------------+------------+
+|err_reason                                                             |error_counts|
++-----------------------------------------------------------------------+------------+
+|trip_executor can not be null                                          |7095        |
+|dropoff date in YYMM must be same as loading date or it cant be missing|635         |
++-----------------------------------------------------------------------+------------+
+
+2026-11-23 20:55:12 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 21:04:25 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-23 21:25:27 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-23 21:25:27 | TRANSFORMATION | INFO | read_fhv_parque_file | read fhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhv/date=2019-02/fhv_tripdata_2019-02.parquet
+2026-11-23 21:25:29 | TRANSFORMATION | INFO | read_fhv_parque_file | SUCESS To Read - fhv_tripdata_2019-02.parquet
+2026-11-23 21:25:30 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-23 21:25:30 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-23 21:25:30 | TRANSFORMATION | INFO | drop_missig_receiver | Drop missing receiver_base_number Started
+2026-11-23 21:25:31 | TRANSFORMATION | INFO | drop_missig_receiver | Finished Successfully
+2026-11-23 21:25:31 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Drop pickup dates not in same month of loading date Started
+2026-11-23 21:25:31 | TRANSFORMATION | INFO | drop_invalid_pickup_date_values | Finished Successfully
+2026-11-23 21:25:31 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Drop DropOff dates not in same month of loading date Started
+2026-11-23 21:25:31 | TRANSFORMATION | INFO | drop_invalid_dropoff_date_values | Finished Successfully
+2026-11-23 21:25:31 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Drop invalid location IDs Started
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | drop_invalid_pickup_location_id | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Drop invalid location IDs Started
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | drop_invalid_dropoff_location_id | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Drop invalid trip executor Started
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | drop_invalid_trip_executor | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Shared Flag Normalization Started
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | normalize_shared_trip_flag | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | add_id_column_to_fhv | Start Add Id column Process
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | add_id_column_to_fhv | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | add_trip_type_column | Adding Trip Type column Started
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | add_trip_type_column | Finished Successfully
+2026-11-23 21:25:32 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/fhv_cleansed_data/date=2019-02']
+2026-11-23 21:25:35 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/fhv_cleansed_data/date=2019-02']
+2026-11-23 21:25:35 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/quarantine_data/date=2019-02']
+2026-11-23 21:25:38 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhv/quarantine_data/date=2019-02']
+2026-11-23 21:26:07 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +-----------------------------------------------------------------------+------------+
+|err_reason                                                             |error_counts|
++-----------------------------------------------------------------------+------------+
+|trip_executor can not be null                                          |7095        |
+|dropoff date in YYMM must be same as loading date or it cant be missing|635         |
++-----------------------------------------------------------------------+------------+
+
+2026-11-23 21:26:07 | py4j.clientserver | INFO | close | Closing down clientserver connection
