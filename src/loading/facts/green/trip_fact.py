@@ -29,18 +29,17 @@ def fill_trip_fact(green_df):
         func.col('trip_id'),
         func.date_format(func.col('pickup_dttm') ,'yyyyMMdd').alias('pick_date_key'),
         func.date_format(func.col('dropoff_dttm') ,'yyyyMMdd').alias('drop_date_key'),
-        func.col('pickup_loc_id').alias('pick_up_zone_key'),
-        func.col('dropoff_loc_id').alias('drop_off_zone_key'),
-        func.col('service_type').alias('service_type_key'),
-        func.col('vendor_id').alias('vendor_key'),
-        func.col('rate_code_id').alias('ratecode_key'),
+        func.col('pickup_loc_id').cast('int').alias('pick_up_zone_key'),
+        func.col('dropoff_loc_id').cast('int').alias('drop_off_zone_key'),
+        func.col('service_type').cast('int').alias('service_type_key'),
+        func.col('vendor_id').cast('int').alias('vendor_key'),
+        func.col('rate_code_id').cast('int').alias('ratecode_key'),
         func.date_format(func.col('pickup_dttm') , "HHmm" ).alias('pick_time_key'),
         func.date_format(func.col('dropoff_dttm') , "HHmm" ).alias('drop_time_key'),
         func.col('trip_type').cast('int').alias('trip_type_key')
         
     )
     
-    trip_fct.show(10,truncate=False)
     
     return trip_fct
 
