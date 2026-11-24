@@ -1,0 +1,15 @@
+2026-11-24 09:38:26 | INGESTION | INFO | fhvhv Move From Source to HDFS Bronze - 2019-02 - Started
+2026-11-24 09:38:26 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02']
+2026-11-24 09:38:28 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02']jhj
+2026-11-24 09:38:28 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv']
+2026-11-24 09:38:30 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-rm', '-r', '-f', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv']jhj
+2026-11-24 09:38:30 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv']
+2026-11-24 09:38:32 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv']jhj
+2026-11-24 09:38:32 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02']
+2026-11-24 09:38:35 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02']jhj
+2026-11-24 09:38:35 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-put', '/home/linux/Desktop/data-engineering-projects/NYC-Taxi-Data-Lake-E2E/data/fhvhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv']
+2026-11-24 09:38:42 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-put', '/home/linux/Desktop/data-engineering-projects/NYC-Taxi-Data-Lake-E2E/data/fhvhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv']jhj
+2026-11-24 09:38:42 | INGESTION | INFO | Executing ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv/fhvhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02/fhvhv_tripdata_2019-02.parquet']
+2026-11-24 09:38:44 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv/fhvhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02/fhvhv_tripdata_2019-02.parquet']jhj
+2026-11-24 09:38:44 | INGESTION | INFO | Ingestion Job Finished with execution time  0.30
+2026-11-24 09:38:44 | INGESTION | INFO | Ingestion From STG to HDFS Bronze Successed
