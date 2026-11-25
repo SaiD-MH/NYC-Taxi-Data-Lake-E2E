@@ -1,0 +1,92 @@
+
+|-- shared_match_flag: string (nullable = true)
+|-- access_a_ride_flag: string (nullable = true)
+|-- shared_request_flag: string (nullable = true)
+
+
+
+
+|-- hvfhs_license_num: string (nullable = true) -->  Mother Company 
+|-- originating_base_num: string (nullable = true) --> Receviable
+|-- dispatching_base_num: string (nullable = true) --> Executor
+
+|-- pickup_datetime: timestamp_ntz (nullable = true)
+|-- dropoff_datetime: timestamp_ntz (nullable = true)
+|-- PULocationID: long (nullable = true)
+|-- DOLocationID: long (nullable = true)
+|-- trip_miles: double (nullable = true)
+|-- trip_time: long (nullable = true)
+|-- request_datetime: timestamp_ntz (nullable = true)
+
+|-- tolls: double (nullable = true)
+|-- airport_fee: integer (nullable = true)
+|-- base_passenger_fare: double (nullable = true) --> Base Payment
+|-- bcf: double (nullable = true)
+|-- driver_pay: double (nullable = true) -> driver money after all discount from the trip taxes
+|-- sales_tax: double (nullable = true)
+|-- tips: double (nullable = true)
+|-- congestion_surcharge: double (nullable = true)
+
+
+|-- wav_request_flag: string (nullable = true)              --|  ask for specifal car 
+|-- wav_match_flag: integer (nullable = true)               --|  actually got his request
+|-- on_scene_datetime: timestamp_ntz (nullable = true)      --|  when driver arrive for the rider
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+root
+ |-- hvfhs_license_num: string (nullable = true)      ======> DONE                                                                                               
+ |-- trip_executor: string (nullable = true)           ======> DONE                                    
+ |-- receiver_base_number: string (nullable = true)      ======> DONE                                        
+                                                
+ |-- request_dttm: timestamp_ntz (nullable = true)           ======> DONE                                     
+ |-- accessiable_on_scene_dttm: timestamp_ntz (nullable = true)                                             
+ |-- pickup_dttm: timestamp_ntz (nullable = true)        ======> DONE                                         
+ |-- dropoff_dttm: timestamp_ntz (nullable = true)      ======> DONE                                          
+                                                
+                                                
+                                                
+ |-- pickup_loc_id: long (nullable = true)            ======> DONE                                   
+ |-- dropoff_loc_id: long (nullable = true)           ======> DONE                                   
+                                                
+                                                
+ |-- trip_distance: double (nullable = true)     ======> DONE                                                           
+ |-- trip_time: long (nullable = true)             ======> DONE                                      
+                                                
+                                                
+ |-- base_amount: double (nullable = true)       ======> DONE                                       
+ |-- tolls: double (nullable = true)            ======> DONE                                        
+ |-- bcf: double (nullable = true)                ======> DONE                              
+ |-- sales_tax: double (nullable = true)          ======> DONE                                      
+ |-- congestion_surcharge: double (nullable = true)  ======> DONE                                           
+ |-- airport_fee: integer (nullable = true)         ======> DONE                                      
+ |-- tips: double (nullable = true)                ======> DONE                             
+ |-- driver_pay: double (nullable = true)          ======> DONE                                     
+                                                
+                                                
+ |-- passenger_agreed_to_shared_ride_flag: string (nullable = true)   ======> DONE                                               
+ |-- passenger_actually_shared_ride_flag: string (nullable = true)    ======> DONE                                             
+ |-- mta_access_a_ride_trip_flag: string (nullable = true)                                              
+                                                
+ |-- accessible_request_flag: string (nullable = true)               ======> DONE                              
+ |-- accessible_match_flag: integer (nullable = true)                ======> DONE                   
+                                                
+                                                
+
+
+
+
+
