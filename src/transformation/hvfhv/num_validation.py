@@ -21,8 +21,7 @@ spark.sparkContext.setLogLevel("OFF")
 
 
 
-src = spark.read.parquet('NYC-Taxi/bronze/fhvhv/date=2019-02/fhvhv_tripdata_2019-02.parquet')\
-.filter(func.col('wav_request_flag') == 'Y').count()
+spark.read.parquet('NYC-Taxi/silver/fhvhv/fhvhv_cleansed_data').printSchema()
 
 
-print(src)
+# print(src) # ~ 13M

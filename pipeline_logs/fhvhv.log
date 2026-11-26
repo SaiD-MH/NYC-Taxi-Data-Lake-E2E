@@ -13,3 +13,125 @@
 2026-11-24 09:38:44 | INGESTION | INFO | SUCCESS |  ['hdfs', 'dfs', '-mv', '/user/linux/NYC-Taxi/stg_temp_write/fhvhv/fhvhv_tripdata_2019-02.parquet', '/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02/fhvhv_tripdata_2019-02.parquet']jhj
 2026-11-24 09:38:44 | INGESTION | INFO | Ingestion Job Finished with execution time  0.30
 2026-11-24 09:38:44 | INGESTION | INFO | Ingestion From STG to HDFS Bronze Successed
+2026-11-25 08:59:25 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-25 08:59:25 | TRANSFORMATION | INFO | read_fhvhv_parque_file | read fhvhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02/fhvhv_tripdata_2019-02.parquet
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | read_fhvhv_parque_file | SUCESS To Read - fhvhv_tripdata_2019-02.parquet
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_id_column_to_fhvhv | Start Add Id column Process
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_id_column_to_fhvhv | Finished Successfully
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_trip_type_column | Adding Trip Type column Started
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_trip_type_column | Finished Successfully
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_pickup_month | Adding Pickup Month Started
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | add_dropoff_month | Adding dropoff Month Started
+2026-11-25 08:59:27 | TRANSFORMATION | INFO | pickup_date_valid_range | Drop pickup dates not in same month of loading date Started
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | pickup_date_valid_range | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | dropoff_date_valid_range | Drop dropOff dates not in same month of loading date Started
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | dropoff_date_valid_range | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Drop invalid pickup location records
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Drop invalid dropoff location records
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Drop invalid trip distances
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_trip_time_records | Drop invalid trip time
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_trip_time_records | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_hvfhs_license_num | Drop invalid trip hvfhs_license_num
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_hvfhs_license_num | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_missing_receiver_executor_base_number | Drop invalid trip hvfhs_license_num
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_missing_receiver_executor_base_number | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_base_amount_records | Drop invalid trip base_amount
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_base_amount_records | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_driver_pay | Drop invalid driver pay
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_driver_pay | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_shared_trip_info | Drop invalid Shared Trip Info
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_shared_trip_info | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_wav_request_flag | Drop invalid Shared Trip Info
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_wav_request_flag | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_on_scene_valid_range | Drop pickup dates not in same month of loading date Started
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | drop_invalid_on_scene_valid_range | Finished Successfully
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | add_airport_flag | Adding airport flag Started
+2026-11-25 08:59:28 | TRANSFORMATION | INFO | add_trip_enrichment_columns | Drop Platform Take Calculation
+2026-11-25 08:59:29 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/fhvhv_cleansed_data/date=2019-02']
+2026-11-25 08:59:31 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/fhvhv_cleansed_data/date=2019-02']
+2026-11-25 08:59:31 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/quarantine_data/date=2019-02']
+2026-11-25 08:59:32 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/quarantine_data/date=2019-02']
+2026-11-25 09:09:30 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +--------------------------------------------------------------------+------------+
+|err_reason                                                          |error_counts|
++--------------------------------------------------------------------+------------+
+|Trip time must be greater than zero                                 |2232        |
+|Trip distance must be greater than zero                             |6411        |
+|accessiable_on_scene_dttm date in YYMM must be same  as loading date|978055      |
+|drop_off date in YYMM must be same  as loading date                 |11238       |
+|receiver_base_number or trip_executor can not be missing            |5558336     |
+|Trip driver_pay must be greater than zero                           |44941       |
+|Null values or pickup >= dropoff not allowed                        |108937      |
+|Trip base_amount must be greater than zero                          |87797       |
++--------------------------------------------------------------------+------------+
+
+2026-11-25 09:09:30 | py4j.clientserver | INFO | close | Closing down clientserver connection
+2026-11-25 09:24:04 | TRANSFORMATION | INFO | run_transformation | Start Transformation Process loading_date =2019-02
+2026-11-25 09:24:04 | TRANSFORMATION | INFO | read_fhvhv_parque_file | read fhvhv parquet file path: hdfs://localhost:9000/user/linux/NYC-Taxi/bronze/fhvhv/date=2019-02/fhvhv_tripdata_2019-02.parquet
+2026-11-25 09:24:07 | TRANSFORMATION | INFO | read_fhvhv_parque_file | SUCESS To Read - fhvhv_tripdata_2019-02.parquet
+2026-11-25 09:24:07 | TRANSFORMATION | INFO | columns_renaming | Start Columns Normlization Process
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | columns_renaming | Finished Successfully
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_id_column_to_fhvhv | Start Add Id column Process
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_id_column_to_fhvhv | Finished Successfully
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_service_type_column | Shared Flag Normalization Started
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_service_type_column | Finished Successfully
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_trip_type_column | Adding Trip Type column Started
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_trip_type_column | Finished Successfully
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_pickup_month | Adding Pickup Month Started
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | add_dropoff_month | Adding dropoff Month Started
+2026-11-25 09:24:08 | TRANSFORMATION | INFO | pickup_date_valid_range | Drop pickup dates not in same month of loading date Started
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | pickup_date_valid_range | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | dropoff_date_valid_range | Drop dropOff dates not in same month of loading date Started
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | dropoff_date_valid_range | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Drop invalid time ranges pick must be less than drop
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_time_ranges_pick_and_drop | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Drop invalid pickup location records
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_pickup_locations_records | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Drop invalid dropoff location records
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_dropoff_locations_records | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Drop invalid trip distances
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_trip_distance_records | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_trip_time_records | Drop invalid trip time
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_trip_time_records | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_hvfhs_license_num | Drop invalid trip hvfhs_license_num
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_invalid_hvfhs_license_num | Finished Successfully
+2026-11-25 09:24:09 | TRANSFORMATION | INFO | drop_missing_receiver_executor_base_number | Drop invalid trip hvfhs_license_num
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_missing_receiver_executor_base_number | Finished Successfully
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_base_amount_records | Drop invalid trip base_amount
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_base_amount_records | Finished Successfully
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_driver_pay | Drop invalid driver pay
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_driver_pay | Finished Successfully
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_shared_trip_info | Drop invalid Shared Trip Info
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_shared_trip_info | Finished Successfully
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_wav_request_flag | Drop invalid Shared Trip Info
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_wav_request_flag | Finished Successfully
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_on_scene_valid_range | Drop pickup dates not in same month of loading date Started
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | drop_invalid_on_scene_valid_range | Finished Successfully
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | add_airport_flag | Adding airport flag Started
+2026-11-25 09:24:10 | TRANSFORMATION | INFO | add_trip_enrichment_columns | Drop Platform Take Calculation
+2026-11-25 09:24:11 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/fhvhv_cleansed_data/date=2019-02']
+2026-11-25 09:24:12 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/fhvhv_cleansed_data/date=2019-02']
+2026-11-25 09:24:12 | TRANSFORMATION | INFO | hdfs | Executing ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/quarantine_data/date=2019-02']
+2026-11-25 09:24:14 | TRANSFORMATION | INFO | hdfs | SUCCESS |  ['hdfs', 'dfs', '-mkdir', '-p', '/user/linux/NYC-Taxi/silver/fhvhv/quarantine_data/date=2019-02']
+2026-11-25 09:34:30 | TRANSFORMATION | INFO | run_transformation | Transformation Process for this loading_date = 2019-02 finished Sucessfully : +--------------------------------------------------------------------+------------+
+|err_reason                                                          |error_counts|
++--------------------------------------------------------------------+------------+
+|Trip time must be greater than zero                                 |2232        |
+|Trip distance must be greater than zero                             |6411        |
+|accessiable_on_scene_dttm date in YYMM must be same  as loading date|978055      |
+|drop_off date in YYMM must be same  as loading date                 |11238       |
+|receiver_base_number or trip_executor can not be missing            |5558336     |
+|Trip driver_pay must be greater than zero                           |44941       |
+|Null values or pickup >= dropoff not allowed                        |108937      |
+|Trip base_amount must be greater than zero                          |87797       |
++--------------------------------------------------------------------+------------+
+
+2026-11-25 09:34:30 | py4j.clientserver | INFO | close | Closing down clientserver connection

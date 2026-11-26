@@ -467,7 +467,7 @@ def run_transformation():
 
     create_loading_date_dir(pipeline_configs.silver_path , pipeline_configs.loading_date)
 
-    store_df_as_parquet(df21 , 'fhvhv_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
+    store_df_as_parquet(df24 , 'fhvhv_cleansed_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
     store_df_as_parquet(fhvhv_errors , 'quarantine_data' , pipeline_configs.silver_path , pipeline_configs.loading_date)
 
 
