@@ -4,7 +4,7 @@ from pyspark.sql import functions as func
 from pathlib import Path
 import argparse
 # 1. Initialize a local Spark Session
-spark = SparkSession.builder.appName("fhv-Loading-zone-fact")\
+spark = SparkSession.builder.appName("fhvhv-Loading-zone-fact")\
                     .config("spark.eventLog.enabled", "true") \
                     .config("spark.eventLog.dir", "file:///tmp/spark-events") \
                     .config("spark.sql.sources.partitionOverwriteMode", "dynamic")\
@@ -15,7 +15,7 @@ spark = SparkSession.builder.appName("fhv-Loading-zone-fact")\
 args = argparse.ArgumentParser(description='Dims Locations in HDFS')
 args.add_argument('--base_dim_path' ,type=str ,  default='hdfs://localhost:9000/user/linux/NYC-Taxi/gold/dims')
 args.add_argument('--loading_date' , type= str , default='2019-02' )
-args.add_argument('--fhv_path', type=str , default='hdfs://localhost:9000/user/linux/NYC-Taxi/silver/fhv/fhv_cleansed_data')
+args.add_argument('--fhvhv_path', type=str , default='hdfs://localhost:9000/user/linux/NYC-Taxi/silver/fhvhv/fhvhv_cleansed_data')
 args.add_argument('--fact_path' , type=str ,  default='hdfs://localhost:9000/user/linux/NYC-Taxi/gold/facts')
 run_config = args.parse_args()
 
@@ -23,8 +23,8 @@ def read_dim_table(dim_base_path , dim_name):
     return spark.read.parquet(f"{dim_base_path}/{dim_name}")
 
 
-def read_cleansed_fhv(path_to_fhv , loading_date):
-    return spark.read.parquet(f'{path_to_fhv}/date={loading_date}')
+def read_cleansed_fhvhv(path_to_fhvhv , loading_date):
+    return spark.read.parquet(f'{path_to_fhvhv}/date={loading_date}')
 
 
 
@@ -58,13 +58,13 @@ def store_zone_fact(zone_df , base_path):
 def fill_zone_fact():
 
 
-    fhv_df = read_cleansed_fhv(run_config.fhv_path , run_config.loading_date)
+    fhvhv_df = read_cleansed_fhvhv(run_config.fhvhv_path , run_config.loading_date)
     zone_dim , service_dim , date_dim , time_dim = load_dims_table()
 
     # SELECT Key Columns from dims for cross table building
  
     zone_df = zone_dim.select(func.col('location_id').alias('zone_key'))
-    service_df = service_dim.select(func.col('service_id').cast('int').alias('service_key')).filter(func.col('service_id') == 3)
+    service_df = service_dim.select(func.col('service_id').cast('int').alias('service_key')).filter(func.col('service_id') == 4)
     date_df = date_dim.select(func.col('date_key')).filter(
             func.date_format(func.to_date("date_key", "yyyyMMdd"), "yyyy-MM") == run_config.loading_date
 
@@ -77,7 +77,7 @@ def fill_zone_fact():
 
 
     dim_joins.createOrReplaceTempView('dims')
-    fhv_df.createOrReplaceTempView('fhv')
+    fhvhv_df.createOrReplaceTempView('fhvhv')
 
 
     zone_fact = spark.sql(
@@ -88,7 +88,7 @@ def fill_zone_fact():
                d.hour,
                (
                     SELECT count(*) 
-                    FROM fhv y 
+                    FROM fhvhv y 
                     WHERE y.pickup_loc_id = d.zone_key AND 
                          y.service_type = d.service_key  AND 
                          date_format(y.pickup_dttm, 'yyyyMMdd')= d.date_key AND
@@ -96,7 +96,7 @@ def fill_zone_fact():
                 ) as pickup_counts,
                 (
                     SELECT count(*) 
-                    FROM fhv y 
+                    FROM fhvhv y 
                     WHERE y.dropoff_loc_id = d.zone_key AND 
                          y.service_type = d.service_key  AND 
                          date_format(y.dropoff_dttm, 'yyyyMMdd')= d.date_key AND
@@ -108,6 +108,7 @@ def fill_zone_fact():
     """
     )
 
+    dim_joins.show()
 
 
     store_zone_fact(zone_fact , run_config.fact_path)
@@ -116,3 +117,4 @@ def fill_zone_fact():
 
 if __name__ == '__main__':
     fill_zone_fact()
+    
