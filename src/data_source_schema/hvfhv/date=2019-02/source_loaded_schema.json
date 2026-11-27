@@ -1,0 +1,149 @@
+{
+  "type": "struct",
+  "fields": [
+    {
+      "name": "hvfhs_license_num",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "dispatching_base_num",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "originating_base_num",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "request_datetime",
+      "type": "timestamp_ntz",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "on_scene_datetime",
+      "type": "timestamp_ntz",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "pickup_datetime",
+      "type": "timestamp_ntz",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "dropoff_datetime",
+      "type": "timestamp_ntz",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "PULocationID",
+      "type": "long",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "DOLocationID",
+      "type": "long",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "trip_miles",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "trip_time",
+      "type": "long",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "base_passenger_fare",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "tolls",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "bcf",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "sales_tax",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "congestion_surcharge",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "airport_fee",
+      "type": "integer",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "tips",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "driver_pay",
+      "type": "double",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "shared_request_flag",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "shared_match_flag",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "access_a_ride_flag",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "wav_request_flag",
+      "type": "string",
+      "nullable": true,
+      "metadata": {}
+    },
+    {
+      "name": "wav_match_flag",
+      "type": "integer",
+      "nullable": true,
+      "metadata": {}
+    }
+  ]
+}
