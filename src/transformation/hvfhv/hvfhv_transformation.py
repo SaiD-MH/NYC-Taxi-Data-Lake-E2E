@@ -377,6 +377,7 @@ def drop_invalid_shared_trip_info(fhvhv_df):
 def add_total_amount(fhvhv_df):
 
     return fhvhv_df.withColumn( 'total_amount',
+    func.round(
     func.coalesce(func.col('base_amount'), func.lit(0)) +
     func.coalesce(func.col('tolls'), func.lit(0)) +
     func.coalesce(func.col('bcf'), func.lit(0)) +
@@ -384,7 +385,9 @@ def add_total_amount(fhvhv_df):
     func.coalesce(func.col('congestion_surcharge'), func.lit(0)) +
     func.coalesce(func.col('airport_fee'), func.lit(0)) +
     func.coalesce(func.col('tips'), func.lit(0))
+    ), 2
     )
+
 
 
 def drop_invalid_wav_request_flag(fhvhv_df):
@@ -404,10 +407,10 @@ def drop_invalid_wav_request_flag(fhvhv_df):
 def add_trip_enrichment_columns(fhvhv_df):
     transformation_logging.info('Drop Platform Take Calculation')
 
-    return fhvhv_df.withColumn('platform_take' , func.col('base_amount') - func.col('driver_pay')  )\
-                   .withColumn('driver_pay_ratio' , func.col('driver_pay') / func.col('base_amount'))\
-                   .withColumn('Pay_per_mile' ,  func.col('driver_pay') / func.col('trip_distance'))\
-                   .withColumn('Pay_per_minute', func.col('driver_pay') / (func.col('trip_time') / 60 ))
+    return fhvhv_df.withColumn('platform_take' , func.round(func.col('base_amount') - func.col('driver_pay') , 2)  )\
+                   .withColumn('driver_pay_ratio' , func.round(func.col('driver_pay') / func.col('base_amount') , 2) )\
+                   .withColumn('Pay_per_mile' ,  func.round(func.col('driver_pay') / func.col('trip_distance'), 2 ) )\
+                   .withColumn('Pay_per_minute', func.round(func.col('driver_pay') / (func.col('trip_time') / 60 ),2 ))
 
 
 def run_transformation():
